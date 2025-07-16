@@ -39,6 +39,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-mail")
 	implementation("org.springframework.boot:spring-boot-starter-batch")
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+	implementation("com.giffing.bucket4j.spring.boot.starter:bucket4j-spring-boot-starter:0.12.10")
 	implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
 	implementation("com.openhtmltopdf:openhtmltopdf-pdfbox:1.0.10")
 	testImplementation("org.springframework.batch:spring-batch-test")

@@ -21,7 +21,7 @@ import java.util.Date
 class AuthController(val authenticationManager: AuthenticationManager,
     val authUserService: AuthUserService,
     val jwtService: JwtService,
-    val jwtProperties: JwtProperties
+    val jwtProperties: JwtProperties,
 ) {
 
     @PostMapping("/login")
