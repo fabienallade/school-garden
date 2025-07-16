@@ -4,12 +4,12 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController(value = "/")
-class Greeting {
+class HomeController {
     @RequestMapping("/")
     fun hello() = "Hello World!"
 
     @RequestMapping("/greet")
     fun greet(): String {
-        return "Hello fabien"
+        return "Hello Fabien"
     }
 }
