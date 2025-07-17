@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController
 class UserController(@Autowired private val userRepository: UserRepository) {
 
     @RequestMapping("/", method = [RequestMethod.GET])
-    fun index(): MutableIterable<User> {
+    fun index(): List<User> {
         return userRepository.findAll()
     }
 }

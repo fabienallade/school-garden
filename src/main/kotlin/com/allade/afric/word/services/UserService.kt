@@ -15,7 +15,7 @@ class UserService(private val userRepository: UserRepository) {
         return userRepository.save(user)
     }
 
-    fun findAll(): MutableIterable<User> {
+    fun findAll(): List<User> {
         return userRepository.findAll()
     }
 
