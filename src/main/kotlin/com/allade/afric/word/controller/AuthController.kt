@@ -1,9 +1,9 @@
 package com.allade.afric.word.controller
 
 import com.allade.afric.word.config.JwtProperties
+import com.allade.afric.word.dto.UserRegisterRequestDto
 import com.allade.afric.word.services.AuthUserService
 import com.allade.afric.word.services.JwtService
-import com.allade.afric.word.validation.ConfirmPasswordInterface
 import jakarta.validation.Valid
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank
@@ -38,7 +38,7 @@ class AuthController(val authenticationManager: AuthenticationManager,
     }
 
     @PostMapping("/register")
-    fun register(@Valid @RequestBody registerRequest: RegisterRequest){
+    fun register(@Valid @RequestBody registerRequest: UserRegisterRequestDto){
 
     }
 }
@@ -47,10 +47,3 @@ data class LoginRequest(
     @field:Email val email: String,
     @field:NotBlank @field:Size(min = 8, max = 200) val password: String)
 data class AuthenticationResponse(val token:String)
-
-data class RegisterRequest(
-    @field:NotBlank val name:String,
-    @field:NotBlank @field:Email val email: String,
-    @field:NotBlank @field:Size(min = 8, max = 200) override val password: String,
-    @field:NotBlank override val confirmPassword: String
-):ConfirmPasswordInterface

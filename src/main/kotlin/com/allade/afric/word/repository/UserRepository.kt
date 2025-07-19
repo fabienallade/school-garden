@@ -9,4 +9,5 @@ interface UserRepository: PagingAndSortingRepository<User, Long> {
     fun save(user: User): User
     fun findAll(): List<User>
     fun deleteAll()
+    fun existsByEmail(email: String): Boolean
 }

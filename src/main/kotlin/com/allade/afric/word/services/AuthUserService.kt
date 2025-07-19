@@ -1,5 +1,6 @@
 package com.allade.afric.word.services
 
+import com.allade.afric.word.dto.UserRegisterRequestDto
 import com.allade.afric.word.repository.UserRepository
 import com.allade.afric.word.model.User as UserApplication
 import org.springframework.security.core.userdetails.User
@@ -9,7 +10,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
 
 @Service
-class AuthUserService(private val userRepository: UserRepository):UserDetailsService {
+class AuthUserService(
+    private val userRepository: UserRepository,
+    private val userService: UserService):UserDetailsService {
     override fun loadUserByUsername(username: String): UserDetails =
         userRepository.findByEmail(username)
             ?.mapToUserDetails()
@@ -21,4 +24,12 @@ class AuthUserService(private val userRepository: UserRepository):UserDetailsSer
             .password(this.password)
 //            .roles(this.role.name)
             .build()
+
+//    fun register(userRegister: UserRegisterRequestDto): User {
+//
+//    }
+//
+//    fun existsByEmail(email: String): Boolean{
+//        return userRepository.existsByEmail(email)
+//    }
 }

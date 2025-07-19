@@ -7,7 +7,7 @@ import org.springframework.boot.CommandLineRunner
 class DataLoader(private val userRepository: UserRepository) : CommandLineRunner {
     override fun run(vararg args: String?) {
         userRepository.deleteAll()
-        for (i in 1..9){
+        for (i in 1..20){
             userRepository.save(User("admin", "admin", "admin",""))
         }
     }

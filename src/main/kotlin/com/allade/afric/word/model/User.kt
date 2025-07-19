@@ -9,6 +9,7 @@ import jakarta.persistence.Id
 import jakarta.persistence.OneToOne
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
+import org.springframework.http.ResponseEntity
 import java.util.*
 
 @Entity
@@ -21,4 +22,8 @@ class User(
     @CreationTimestamp var createdAt: Date = Date(),
     @UpdateTimestamp var updatedAt: Date = Date(),
     @OneToOne val role: Role? = null,
-)
+){
+    private fun User?.toResponseEntity(): ResponseEntity<User> {
+        return this.let { ResponseEntity.ok(it) ?: ResponseEntity.notFound().build() }
+    }
+}

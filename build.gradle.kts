@@ -42,7 +42,7 @@ dependencies {
 	implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
 	implementation("com.openhtmltopdf:openhtmltopdf-pdfbox:1.0.10")
 	testImplementation("org.springframework.batch:spring-batch-test")
-	implementation("com.bucket4j:bucket4j-core:8.14.0")
+	implementation("com.bucket4j:bucket4j-core:8.9.0")
 	developmentOnly("org.springframework.boot:spring-boot-docker-compose")
 	"developmentOnly"("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.mysql:mysql-connector-j")
