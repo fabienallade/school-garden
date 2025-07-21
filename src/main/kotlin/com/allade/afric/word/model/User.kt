@@ -18,10 +18,10 @@ class User(
     var lastName: String = "",
     @Column(nullable = false) var email: String = "",
     @JsonIgnore var password: String = "",
+    @OneToOne val role: Role? = null,
     @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: Long? = null,
     @CreationTimestamp var createdAt: Date = Date(),
     @UpdateTimestamp var updatedAt: Date = Date(),
-    @OneToOne val role: Role? = null,
 ){
     private fun User?.toResponseEntity(): ResponseEntity<User> {
         return this.let { ResponseEntity.ok(it) ?: ResponseEntity.notFound().build() }

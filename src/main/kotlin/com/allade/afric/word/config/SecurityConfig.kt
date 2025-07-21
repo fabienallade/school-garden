@@ -2,6 +2,7 @@ package com.allade.afric.word.config
 
 import com.allade.afric.word.repository.UserRepository
 import com.allade.afric.word.services.AuthUserService
+import com.allade.afric.word.services.UserService
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
@@ -24,15 +25,15 @@ class SecurityConfig {
     fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
 
     @Bean
-    fun userDetailsService(userRepository: UserRepository): UserDetailsService {
-        return AuthUserService(userRepository)
+    fun userDetailsService(userRepository: UserRepository,userService: UserService): UserDetailsService {
+        return AuthUserService(userRepository,userService)
     }
 
     @Bean
-    fun authenticationProvider(userRepository: UserRepository):AuthenticationProvider =
+    fun authenticationProvider(userRepository: UserRepository,userService: UserService):AuthenticationProvider =
         DaoAuthenticationProvider()
         .also {
-            it.setUserDetailsService(userDetailsService(userRepository))
+            it.setUserDetailsService(userDetailsService(userRepository, userService))
             it.setPasswordEncoder(passwordEncoder())
     }
 
