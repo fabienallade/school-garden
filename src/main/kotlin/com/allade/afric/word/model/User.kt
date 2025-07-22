@@ -6,6 +6,7 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.ManyToOne
 import jakarta.persistence.OneToOne
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
@@ -18,11 +19,17 @@ class User(
     var lastName: String = "",
     @Column(nullable = false) var email: String = "",
     @JsonIgnore var password: String = "",
-    @OneToOne val role: Role? = null,
-    @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: Long? = null,
-    @CreationTimestamp var createdAt: Date = Date(),
-    @UpdateTimestamp var updatedAt: Date = Date(),
+    @ManyToOne val role: Role? = null,
 ){
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    var id:Long?= null
+
+    @CreationTimestamp
+    var createdAt: Date = Date()
+
+    @UpdateTimestamp
+    var updatedAt: Date = Date()
+
     private fun User?.toResponseEntity(): ResponseEntity<User> {
         return this.let { ResponseEntity.ok(it) ?: ResponseEntity.notFound().build() }
     }
