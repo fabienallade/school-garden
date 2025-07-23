@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository
 import java.util.UUID
 
 @Repository
-interface RoleRepository: JpaRepository<Role, Long> {
+interface RoleRepository: JpaRepository<Role, UUID> {
     fun findByName(name:String): Role?
 }

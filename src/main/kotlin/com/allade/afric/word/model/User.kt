@@ -7,21 +7,22 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.ManyToOne
-import jakarta.persistence.OneToOne
+import jakarta.persistence.Table
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import org.springframework.http.ResponseEntity
 import java.util.*
 
 @Entity
+@Table(name = "users")
 class User(
     var firstName: String = "",
     var lastName: String = "",
     @Column(nullable = false) var email: String = "",
     @JsonIgnore var password: String = "",
     @ManyToOne val role: Role? = null,
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    var id:Long?= null
+    @Id @GeneratedValue(strategy = GenerationType.UUID)
+    var id:UUID?= null
 ){
 
 
