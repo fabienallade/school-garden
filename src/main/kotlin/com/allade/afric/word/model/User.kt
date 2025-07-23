@@ -20,9 +20,10 @@ class User(
     @Column(nullable = false) var email: String = "",
     @JsonIgnore var password: String = "",
     @ManyToOne val role: Role? = null,
-){
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     var id:Long?= null
+){
+
 
     @CreationTimestamp
     var createdAt: Date = Date()
