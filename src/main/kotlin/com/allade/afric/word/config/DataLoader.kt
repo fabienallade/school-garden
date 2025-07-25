@@ -10,7 +10,7 @@ class DataLoader(private val userRepository: UserRepository, private val roleRep
         userRepository.deleteAll()
         roleRepository.deleteAll()
         for (i in 1..2){
-            userRepository.save(User("admin", "admin", "admin",""))
+            userRepository.save(User("admin", "admin", "admin","",""))
         }
     }
 }

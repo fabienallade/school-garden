@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.ManyToOne
+import jakarta.persistence.PostPersist
 import jakarta.persistence.Table
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
@@ -20,6 +21,7 @@ class User(
     var lastName: String = "",
     @Column(nullable = false) var email: String = "",
     @JsonIgnore var password: String = "",
+    var phoneNumber: String = "",
     @ManyToOne val role: Role? = null,
     @Id @GeneratedValue(strategy = GenerationType.UUID)
     var id:UUID?= null
@@ -31,6 +33,11 @@ class User(
 
     @UpdateTimestamp
     var updatedAt: Date = Date()
+
+//    @PostPersist
+//    fun encryptPassword() {
+//
+//    }
 
     private fun User?.toResponseEntity(): ResponseEntity<User> {
         return this.let { ResponseEntity.ok(it) ?: ResponseEntity.notFound().build() }
