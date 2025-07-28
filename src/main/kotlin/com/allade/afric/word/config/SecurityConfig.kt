@@ -51,15 +51,17 @@ class SecurityConfig {
         http
             .csrf {
                 it.disable()
-            }.authorizeHttpRequests {
-                it
-                    .requestMatchers("/api/auth/**")
-                    .permitAll()
-                    .requestMatchers(HttpMethod.POST, "/api/**")
-                    .hasRole("ADMIN")
-                    .anyRequest()
-                    .fullyAuthenticated()
-            }.sessionManagement { session ->
+            }
+//            .authorizeHttpRequests {
+//                it
+//                    .requestMatchers("/api/auth/**")
+//                    .permitAll()
+//                    .requestMatchers(HttpMethod.POST, "/api/**")
+//                    .hasRole("ADMIN")
+//                    .anyRequest()
+//                    .fullyAuthenticated()
+//            }
+            .sessionManagement { session ->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }.authenticationProvider(authenticationProvider)
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)

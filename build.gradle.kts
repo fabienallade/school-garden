@@ -26,6 +26,7 @@ repositories {
 }
 
 dependencies {
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.5")
     implementation("io.jsonwebtoken:jjwt-api:0.12.3")
     implementation("org.flywaydb:flyway-core")
     implementation("org.flywaydb:flyway-mysql")
