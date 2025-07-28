@@ -21,12 +21,10 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.DefaultSecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
+@EnableConfigurationProperties(JwtProperties::class)
 @Configuration
 @EnableWebSecurity
-@EnableConfigurationProperties(JwtProperties::class)
-class SecurityConfig(
-    val authenticationProvider: AuthenticationProvider,
-) {
+class SecurityConfig {
     @Bean
     fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
 
@@ -48,6 +46,7 @@ class SecurityConfig(
     fun securityFilterChain(
         http: HttpSecurity,
         jwtAuthenticationFilter: JwtAuthenticationFilter,
+        authenticationProvider: AuthenticationProvider,
     ): DefaultSecurityFilterChain {
         http
             .csrf {
@@ -56,7 +55,7 @@ class SecurityConfig(
                 it
                     .requestMatchers("/api/auth/**")
                     .permitAll()
-                    .requestMatchers(HttpMethod.POST, "/api/auth/login")
+                    .requestMatchers(HttpMethod.POST, "/api/**")
                     .hasRole("ADMIN")
                     .anyRequest()
                     .fullyAuthenticated()
