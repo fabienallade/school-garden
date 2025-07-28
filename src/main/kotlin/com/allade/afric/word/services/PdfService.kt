@@ -8,9 +8,13 @@ import org.thymeleaf.spring6.SpringTemplateEngine
 import java.io.ByteArrayOutputStream
 
 @Service
-class PdfService(private val templateEngine: TemplateEngine) {
-
-    fun generatePdf(templateName: String, data: HashMap<String,Any>): ByteArray {
+class PdfService(
+    private val templateEngine: TemplateEngine,
+) {
+    fun generatePdf(
+        templateName: String,
+        data: HashMap<String, Any>,
+    ): ByteArray {
         val context = Context()
         context.setVariables(data)
 
@@ -25,7 +29,7 @@ class PdfService(private val templateEngine: TemplateEngine) {
                 builder.run()
                 return os.toByteArray()
             }
-        }catch (e: Exception){
+        } catch (e: Exception) {
             throw e
         }
     }

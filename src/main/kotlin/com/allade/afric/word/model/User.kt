@@ -12,7 +12,8 @@ import jakarta.persistence.Table
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import org.springframework.http.ResponseEntity
-import java.util.*
+import java.util.Date
+import java.util.UUID
 
 @Entity
 @Table(name = "users")
@@ -24,22 +25,13 @@ class User(
     var phoneNumber: String = "",
     @ManyToOne val role: Role? = null,
     @Id @GeneratedValue(strategy = GenerationType.UUID)
-    var id:UUID?= null
-){
-
-
+    var id: UUID? = null,
+) {
     @CreationTimestamp
     var createdAt: Date = Date()
 
     @UpdateTimestamp
     var updatedAt: Date = Date()
 
-//    @PostPersist
-//    fun encryptPassword() {
-//
-//    }
-
-    private fun User?.toResponseEntity(): ResponseEntity<User> {
-        return this.let { ResponseEntity.ok(it) ?: ResponseEntity.notFound().build() }
-    }
+    private fun User?.toResponseEntity(): ResponseEntity<User> = this.let { ResponseEntity.ok(it) ?: ResponseEntity.notFound().build() }
 }

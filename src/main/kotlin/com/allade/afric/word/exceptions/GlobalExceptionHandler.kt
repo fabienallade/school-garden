@@ -9,13 +9,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 @RestControllerAdvice
 class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException::class)
-    fun handleValidationExceptions(e: MethodArgumentNotValidException):
-            ResponseEntity<Map<String, HashMap<String, String?>>> {
-        val errors:HashMap<String,String?> = HashMap()
+    fun handleValidationExceptions(e: MethodArgumentNotValidException): ResponseEntity<Map<String, HashMap<String, String?>>> {
+        val errors: HashMap<String, String?> = HashMap()
         e.bindingResult.fieldErrors.forEach { field ->
             errors[field.field] = field.defaultMessage
         }
 
-        return ResponseEntity(mapOf("errors" to errors),HttpStatus.UNPROCESSABLE_ENTITY)
+        return ResponseEntity(mapOf("errors" to errors), HttpStatus.UNPROCESSABLE_ENTITY)
     }
 }

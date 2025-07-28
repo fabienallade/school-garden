@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/pdf")
-class PdfController(@Autowired val pdfService: PdfService, @Autowired val userService: UserService) {
-
+class PdfController(
+    @Autowired val pdfService: PdfService,
+    @Autowired val userService: UserService,
+) {
     @RequestMapping("/generate", method = [RequestMethod.GET])
     fun generate(): ResponseEntity<ByteArray> {
-        val data: HashMap<String,Any> = HashMap()
+        val data: HashMap<String, Any> = HashMap()
         data["users"] = userService.findAll().toMutableList()
         try {
             val pdfContent = pdfService.generatePdf("thymeleaf_template.html", data)
@@ -24,9 +26,8 @@ class PdfController(@Autowired val pdfService: PdfService, @Autowired val userSe
             val headers = HttpHeaders()
             headers.add("Content-Disposition", "attachment;filename=pdf.pdf")
 
-            return ResponseEntity(pdfContent,headers,HttpStatus.OK)
-
-        }catch (e:Exception){
+            return ResponseEntity(pdfContent, headers, HttpStatus.OK)
+        } catch (e: Exception) {
             throw RuntimeException(e)
         }
     }

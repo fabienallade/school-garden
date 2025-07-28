@@ -9,10 +9,9 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/users")
-class UserController(@Autowired private val userRepository: UserRepository) {
-
+class UserController(
+    @Autowired private val userRepository: UserRepository,
+) {
     @RequestMapping(method = [RequestMethod.GET])
-    fun index(): List<User> {
-        return userRepository.findAll()
-    }
+    fun index(): List<User> = userRepository.findAll()
 }

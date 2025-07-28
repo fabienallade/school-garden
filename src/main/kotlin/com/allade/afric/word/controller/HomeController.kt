@@ -9,7 +9,5 @@ class HomeController {
     fun hello() = "Hello World!"
 
     @RequestMapping("/greet")
-    fun greet(): String {
-        return "Hello Fabien"
-    }
+    fun greet(): String = "Hello Fabien"
 }

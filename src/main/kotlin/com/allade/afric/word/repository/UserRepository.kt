@@ -7,10 +7,14 @@ import org.springframework.stereotype.Repository
 import java.util.UUID
 
 @Repository
-interface UserRepository: PagingAndSortingRepository<User, UUID> {
+interface UserRepository : PagingAndSortingRepository<User, UUID> {
     fun findByEmail(email: String): User?
+
     fun save(user: User): User
+
     fun findAll(): List<User>
+
     fun deleteAll()
+
     fun existsByEmail(email: String): Boolean
 }

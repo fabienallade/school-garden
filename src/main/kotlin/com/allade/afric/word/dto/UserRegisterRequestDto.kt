@@ -10,5 +10,5 @@ data class UserRegisterRequestDto(
     @field:Email val email: String,
     @field:NotBlank val lastName: String,
     @field:NotBlank @field:Size(min = 8, max = 200) override val password: String,
-    @field:NotBlank override val confirmPassword: String
-): ConfirmPasswordInterface
+    @field:NotBlank override val confirmPassword: String,
+) : ConfirmPasswordInterface

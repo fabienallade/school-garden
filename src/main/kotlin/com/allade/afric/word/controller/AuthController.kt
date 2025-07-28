@@ -29,35 +29,42 @@ class AuthController(
     val jwtProperties: JwtProperties,
     private val userService: UserService,
 ) {
-
     @PostMapping("/login")
-    fun login(@Valid @RequestBody loginRequest:LoginRequest): AuthenticationResponse{
-        authenticationManager.authenticate(UsernamePasswordAuthenticationToken(
-            loginRequest.email,
-            loginRequest.password
-        ))
+    fun login(
+        @Valid @RequestBody loginRequest: LoginRequest,
+    ): AuthenticationResponse {
+        authenticationManager.authenticate(
+            UsernamePasswordAuthenticationToken(
+                loginRequest.email,
+                loginRequest.password,
+            ),
+        )
 
         val user = authUserService.loadUserByUsername(loginRequest.email)
 
-        val accessToken = jwtService.generate(user,Date(System.currentTimeMillis() + jwtProperties.accessTokenExpiration))
+        val accessToken = jwtService.generate(user, Date(System.currentTimeMillis() + jwtProperties.accessTokenExpiration))
         return AuthenticationResponse(accessToken)
     }
 
     @PostMapping("/register")
-    fun register(@Valid @RequestBody registerRequest: UserRegisterRequestDto): ResponseEntity<String> {
-
-        if (userService.checkIfExists(registerRequest.email)){
+    fun register(
+        @Valid @RequestBody registerRequest: UserRegisterRequestDto,
+    ): ResponseEntity<String> {
+        if (userService.checkIfExists(registerRequest.email)) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("User already exists")
         }
         try {
-            val user = userService.createUser(User(
-                registerRequest.firstName,
-                registerRequest.lastName,
-                registerRequest.email,
-                registerRequest.password,
-            ))
+            val user =
+                userService.createUser(
+                    User(
+                        registerRequest.firstName,
+                        registerRequest.lastName,
+                        registerRequest.email,
+                        registerRequest.password,
+                    ),
+                )
             println(user)
-        } catch (e:Exception){
+        } catch (e: Exception) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build()
         }
 
@@ -67,5 +74,9 @@ class AuthController(
 
 data class LoginRequest(
     @field:Email val email: String,
-    @field:NotBlank @field:Size(min = 8, max = 200) val password: String)
-data class AuthenticationResponse(val token:String)
+    @field:NotBlank @field:Size(min = 8, max = 200) val password: String,
+)
+
+data class AuthenticationResponse(
+    val token: String,
+)
