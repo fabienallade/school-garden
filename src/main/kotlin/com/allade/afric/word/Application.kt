@@ -5,12 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.web.bind.annotation.RestController
 
-
 @SpringBootApplication
-@RestController
+@RestController("/api/")
 class Application
+
 fun main(args: Array<String>) {
-	runApplication<Application>(*args){
-		setBannerMode(Banner.Mode.CONSOLE)
-	}
+    runApplication<Application>(*args) {
+        setBannerMode(Banner.Mode.CONSOLE)
+    }
 }

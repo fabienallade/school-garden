@@ -10,10 +10,10 @@ import com.allade.afric.word.model.User as UserApplication
 
 @Service
 class AuthUserService(
-    private val userRepository: UserRepository,
+    private val userService: UserService,
 ) : UserDetailsService {
     override fun loadUserByUsername(username: String): UserDetails =
-        userRepository
+        userService
             .findByEmail(username)
             ?.mapToUserDetails()
             ?: throw UsernameNotFoundException("Not found!")

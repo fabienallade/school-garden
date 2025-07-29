@@ -6,9 +6,6 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController(value = "/")
 class HomeController {
-    @RequestMapping("/", method = [RequestMethod.GET])
+    @RequestMapping(method = [RequestMethod.GET])
     fun hello() = "Hello World!"
-
-    @RequestMapping("/greet", method = [RequestMethod.GET])
-    fun greet(): String = "Hello Fabien"
 }

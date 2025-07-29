@@ -1,13 +1,12 @@
 package com.allade.afric.word.config
 
 import com.allade.afric.word.filters.JwtAuthenticationFilter
-import com.allade.afric.word.repository.UserRepository
 import com.allade.afric.word.services.AuthUserService
+import com.allade.afric.word.services.UserService
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider
@@ -29,13 +28,13 @@ class SecurityConfig {
     fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
 
     @Bean
-    fun userDetailsService(userRepository: UserRepository): UserDetailsService = AuthUserService(userRepository)
+    fun userDetailsService(userService: UserService): UserDetailsService = AuthUserService(userService)
 
     @Bean
-    fun authenticationProvider(userRepository: UserRepository): AuthenticationProvider =
+    fun authenticationProvider(userService: UserService): AuthenticationProvider =
         DaoAuthenticationProvider()
             .also {
-                it.setUserDetailsService(userDetailsService(userRepository))
+                it.setUserDetailsService(userDetailsService(userService))
                 it.setPasswordEncoder(passwordEncoder())
             }
 

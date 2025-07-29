@@ -21,7 +21,7 @@ class PdfController(
         val data: HashMap<String, Any> = HashMap()
         data["users"] = userService.findAll().toMutableList()
         try {
-            val pdfContent = pdfService.generatePdf("thymeleaf_template.html", data)
+            val pdfContent = pdfService.generatePdf("thymeleaf_template", data)
 
             val headers = HttpHeaders()
             headers.add("Content-Disposition", "attachment;filename=pdf.pdf")

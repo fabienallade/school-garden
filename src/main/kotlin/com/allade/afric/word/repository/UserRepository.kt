@@ -8,6 +8,8 @@ import java.util.UUID
 
 @Repository
 interface UserRepository : PagingAndSortingRepository<User, UUID> {
+    fun findById(userId: UUID): User
+
     fun findByEmail(email: String): User?
 
     fun save(user: User): User

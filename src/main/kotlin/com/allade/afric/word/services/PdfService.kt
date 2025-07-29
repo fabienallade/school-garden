@@ -18,7 +18,7 @@ class PdfService(
         val context = Context()
         context.setVariables(data)
 
-        val htmlContent: String = templateEngine.process("thymeleaf_template", context)
+        val htmlContent: String = templateEngine.process(templateName, context)
 
         try {
             ByteArrayOutputStream().use { os ->
