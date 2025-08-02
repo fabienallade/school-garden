@@ -32,6 +32,4 @@ class User(
 
     @UpdateTimestamp
     var updatedAt: Date = Date()
-
-    private fun User?.toResponseEntity(): ResponseEntity<User> = this.let { ResponseEntity.ok(it) ?: ResponseEntity.notFound().build() }
 }

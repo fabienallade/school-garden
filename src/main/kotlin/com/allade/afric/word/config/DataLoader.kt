@@ -12,7 +12,7 @@ class DataLoader(
     override fun run(vararg args: String?) {
         userRepository.deleteAll()
         roleRepository.deleteAll()
-        for (i in 1..2) {
+        for (i in 1..3) {
             userRepository.save(User("admin", "admin", "admin", "", ""))
         }
     }

@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController
 import java.util.UUID
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("/api/users")
 class UserController(
     @Autowired private val userService: UserService,
 ) {
-    @RequestMapping(method = [RequestMethod.GET])
+    @RequestMapping("/", method = [RequestMethod.GET])
     fun index(): List<User> = userService.findAll()
 
     @RequestMapping("/{id}", method = [RequestMethod.GET])
