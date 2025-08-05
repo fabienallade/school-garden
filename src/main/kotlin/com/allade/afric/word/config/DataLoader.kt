@@ -12,8 +12,19 @@ class DataLoader(
     override fun run(vararg args: String?) {
         userRepository.deleteAll()
         roleRepository.deleteAll()
-        for (i in 1..3) {
-            userRepository.save(User("admin", "admin", "admin", "", ""))
+        val users =
+            listOf<User>(
+                User("allade", "fabien", "alladefabien@gmail.com", "", ""),
+                User("jean", "ocoto", "jcoto@gmail.com", "", ""),
+                User("paul", "adjame", "adjame@gmail.com", "", ""),
+                User("canlanta", "ekoto", "ekoto@gmail.com", "", ""),
+                User("soso", "evoli", "evoli@gmail.com", "", ""),
+                User("ploto", "vlicoki", "vlicoki@gmail.com", "", ""),
+                User("klakla", "jipolo", "jipolo@gmail.com", "", ""),
+                User("indofo", "molipo", "molipo@gmail.com", "", ""),
+            )
+        for (user in users) {
+            userRepository.save(user)
         }
     }
 }
